@@ -18,7 +18,7 @@ Before using this script, you will need the following:
 
 To use this script for email notifications, you will need your Gmail SMTP password. Follow these steps to obtain it:
 
-1. **Enable Less Secure Apps**: Log in to your Gmail account and go to [Less secure apps](https://myaccount.google.com/lesssecureapps). Turn on "Allow less secure apps" to allow SMTP access. 🔒
+1. **Enable Less Secure Apps**: Log in to your Gmail account and go to [Less secure apps]([https://myaccount.google.com/lesssecureapps](https://myaccount.google.com/apppasswords)). Turn on "Allow less secure apps" to allow SMTP access. 🔒
 
 2. **Generate an App Password**: Go to your Google Account's [Security page](https://myaccount.google.com/security) and under "App passwords," generate an app password specifically for this script. Save this password securely as it will be used in the script configuration. 🔑
 
