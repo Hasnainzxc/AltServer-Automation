@@ -1,24 +1,29 @@
 import smtplib
-from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
 import random
 import datetime
-# Your SMTP Set up
-# Gmail account credentials
-sender_email = "YOUR@gmail.com"
-sender_password = "YOUR_PASSWORD"
+import requests
 
-# Recipient email address
-recipient_email = "THE EMAIL U WANT TO RECIVE "  # Replace with your recipient's email address
+# Gmail account credentials
+sender_email = "analogue00420@gmail.com"
+sender_password = "hrrgykvpwfbduexe"
+
+# Recipient email addresses (add or remove as needed)
+recipient_emails = [
+    "hasnainzxc@icloud.com",
+    "shehzadsaeed60@yahoo.com",
+]
 
 # Email subject
 subject = "PC Turned On"
 
 # Generate a random message for variety
 random_messages = [
-    "Your PC is up and running!",
-    "Good news, your PC is online!",
-    "Time to get things done—your PC is on!",
+    "Your ALR SERVER is up and running!",
+    "Good news, your ALT SERVER is online!",
+    "Time to get things done—your ALT SERVER is on!",
     "Your ALT SERVER is ready to roll!",
 ]
 
@@ -34,32 +39,55 @@ emojis = ["😀", "🚀", "💻", "👍"]
 random_emojis = random.choices(emojis, k=3)  # Select 3 random emojis
 body += f"\n\nThe PC is ready to roll {', '.join(random_emojis)}"
 
-# Add a link to a random online animation (replace with your own links)
-animation_links = [
-    "https://example.com/animation1.gif",
-    "https://example.com/animation2.gif",
-    "https://example.com/animation3.gif",
+# Define the correct GIF URLs
+gif_urls = [
+    "https://media.giphy.com/media/MT5UUV1d4CXE2A37Dg/giphy.gif",
+    "https://media.giphy.com/media/nGMnDqebzDcfm/giphy.gif",
+    "https://media.giphy.com/media/3oKIPnAiaMCws8nOsE/giphy.gif",
+    "https://media.giphy.com/media/mcsPU3SkKrYDdW3aAU/giphy.gif",
+    "https://media.giphy.com/media/FoVzfcqCDSb7zCynOp/giphy.gif",
+    "https://media.giphy.com/media/dZX3AduGrY3uJ7qCsx/giphy.gif",
+    "https://media.giphy.com/media/xT8qBsOjMOcdeGJIU8/giphy.gif",
+    "https://media.giphy.com/media/5ntdy5Ban1dIY/giphy.gif",
+    "https://media.giphy.com/media/l4FGIp6PDxcuJbvdC/giphy.gif",
 ]
 
-# Select a random animation link
-random_animation_link = random.choice(animation_links)
-
-# Add the animation link to the email message
-body += f"\n\n[Click here to view a random animation]({random_animation_link})"
+# Select a random GIF URL
+random_gif_url = random.choice(gif_urls)
 
 # Create a MIMEText object to represent the email
 msg = MIMEMultipart()
 msg["From"] = sender_email
-msg["To"] = recipient_email
+msg["To"] = ", ".join(recipient_emails)  # Join the recipient emails with a comma and space
 msg["Subject"] = subject
-msg.attach(MIMEText(body, "markdown"))
+
+# Create an HTML message with the inline GIF
+html_message = f"""\
+<html>
+  <body>
+    <p>{body}</p>
+    <img src="cid:altservergif" alt="ALT Server GIF">
+  </body>
+</html>
+"""
+
+# Attach the HTML message
+msg.attach(MIMEText(html_message, "html"))
+
+# Download the GIF and attach it as an inline image
+with open("random.gif", "wb") as gif_file:
+    gif_file.write(requests.get(random_gif_url).content)
+
+gif = MIMEImage(open("random.gif", "rb").read(), name="altserver.gif")
+gif.add_header("Content-ID", "<altservergif>")
+msg.attach(gif)
 
 # Send the email using Gmail's SMTP server
 try:
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
     server.login(sender_email, sender_password)
-    server.sendmail(sender_email, recipient_email, msg.as_string())
+    server.sendmail(sender_email, recipient_emails, msg.as_string())
     server.quit()
     print("Email sent successfully!")
 except Exception as e:
