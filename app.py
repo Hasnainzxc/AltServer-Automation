@@ -7,14 +7,17 @@ import datetime
 import requests
 
 # Gmail account credentials
-sender_email = "analogue00420@gmail.com"
-sender_password = "hrrgykvpwfbduexe"
+sender_email = "YOUR@gmail.com"
+sender_password = "YOU PASSWORD"
 
 # Recipient email addresses (add or remove as needed)
+
 recipient_emails = [
-    "hasnainzxc@icloud.com",
-    "shehzadsaeed60@yahoo.com",
+    "c@icloud.com",
+    "@yahoo.com",
 ]
+
+
 
 # Email subject
 subject = "PC Turned On"
