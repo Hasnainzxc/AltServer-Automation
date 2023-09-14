@@ -12,10 +12,7 @@ sender_password = "YOU PASSWORD"
 
 # Recipient email addresses (add or remove as needed)
 
-recipient_emails = [
-    "c@icloud.com",
-    "@yahoo.com",
-]
+
 
 
 
