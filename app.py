@@ -86,12 +86,3 @@ gif.add_header("Content-ID", "<altservergif>")
 msg.attach(gif)
 
 # Send the email using Gmail's SMTP server
-try:
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
-    server.login(sender_email, sender_password)
-    server.sendmail(sender_email, recipient_emails, msg.as_string())
-    server.quit()
-    print("Email sent successfully!")
-except Exception as e:
-    print(f"Failed to send email. Error: {str(e)}")
